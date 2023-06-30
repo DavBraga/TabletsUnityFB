@@ -1,0 +1,3 @@
+fundo branco = fafafa
+text = 10161a
+#379263

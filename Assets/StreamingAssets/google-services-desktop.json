@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "128299016743",
+    "project_id": "unityfbproject",
+    "storage_bucket": "unityfbproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:128299016743:android:ee596c211b56efb04ce402",
+        "android_client_info": {
+          "package_name": "com.DavDev.test.AnotherFBTry"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "128299016743-6t5tn7q75dqsfbd2aq0tpr3kd4h0f4ij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcaoDW9gk51164C3j8UDaLg9b0erpIVNc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "128299016743-6t5tn7q75dqsfbd2aq0tpr3kd4h0f4ij.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
