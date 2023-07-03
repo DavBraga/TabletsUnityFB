@@ -104,13 +104,9 @@ public class BdOps : MonoBehaviour
         CollectionReference collectionRef = db.Collection("Tablets");
         Query query = collectionRef.WhereEqualTo(paramName, paramNumber);
         QuerySnapshot snapshot = await query.GetSnapshotAsync();
-        if(snapshot.Count<1)
-        {
-            alert.Open("Nenhum tablet encontrado!");
-        }
         return snapshot.Documents;
     }
-    public async Task<IEnumerable<DocumentSnapshot>> AsyncQueryDeviceByDictionary(Dictionary<string,int> parameters)
+    public async Task<IEnumerable<DocumentSnapshot>> AsyncQueryDeviceByMultiParamets(List<KeyValuePair<string, int>> parameters)
     {
         
         CollectionReference collectionRef = db.Collection("Tablets");
@@ -119,20 +115,21 @@ public class BdOps : MonoBehaviour
         foreach(KeyValuePair<string, int>parameter in parameters)
         {
             Debug.Log("by key:"+ parameter.Key);
-          cachedQueryResult =  result = result.Union(await AsyncQueryDeviceByParameter(parameter.Key,parameter.Value)) ;
+            cachedQueryResult = result.Union(await AsyncQueryDeviceByParameter(parameter.Key,parameter.Value)) ;
+            result = cachedQueryResult;
         }
         return result;
     }
 
-    public async Task<IEnumerable<DocumentSnapshot>> AsyncQueryDeviceByDictionaryWithExclusions(Dictionary<string,int> parameters,Dictionary<string,int> exclusions)
+    public async Task<IEnumerable<DocumentSnapshot>> AsyncQueryDeviceByDictionaryWithExclusions(List<KeyValuePair<string, int>>  parameters,List<KeyValuePair<string, int>>  exclusions)
     {
         CollectionReference collectionRef = db.Collection("Tablets");
 
         IEnumerable<DocumentSnapshot> result = Enumerable.Empty<DocumentSnapshot>() ;
 
-        result = await AsyncQueryDeviceByDictionary(parameters);
+        result = await AsyncQueryDeviceByMultiParamets(parameters);
         if(exclusions!=null)
-        cachedQueryResult =result.Except(await AsyncQueryDeviceByDictionary(exclusions));
+        cachedQueryResult =result.Except(await AsyncQueryDeviceByMultiParamets(exclusions));
         return result;
     }
 

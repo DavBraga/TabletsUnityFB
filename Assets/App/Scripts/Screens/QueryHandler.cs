@@ -101,30 +101,30 @@ public class QueryHandler : MonoBehaviour
     public async void AsyncAdvancedQueryData()
     {
         // criar dicionário com parametros de pesquisa 
-        Dictionary<string, int> parameters = new();
+        List<KeyValuePair<string, int>>  parameters = new();
         // parametros referentes ao paradeiro
         if(comResponsavel.isOn)
-            parameters.TryAdd("paradeiro",0);
+        parameters.Add( new KeyValuePair< string, int >("paradeiro",0 ) ); 
         if(naEscola.isOn)
-            parameters.TryAdd("paradeiro",1);
+        parameters.Add( new KeyValuePair< string, int >("paradeiro",1 ) ); 
         if(naSME.isOn)
-            parameters.TryAdd("paradeiro",2);
+        parameters.Add( new KeyValuePair< string, int >("paradeiro",2 ) ); 
         if(Desaparecido.isOn)
-            parameters.TryAdd("paradeiro",3);
+        parameters.Add( new KeyValuePair< string, int >("paradeiro",3 ) ); 
         // parametros referentes ao status
         if(funcionando.isOn)
-            parameters.TryAdd("status",0);
+        parameters.Add( new KeyValuePair< string, int >("status",0 ) ); 
         if(quebrado.isOn)
-            parameters.TryAdd("status",1);
+        parameters.Add( new KeyValuePair< string, int >("status",1 ) ); 
         if(emManutencao.isOn)
-            parameters.TryAdd("status",2);
-         if(baixa.isOn)
-            parameters.TryAdd("status",3);
+        parameters.Add( new KeyValuePair< string, int >("status",2 ) ); 
+        if(baixa.isOn)
+        parameters.Add( new KeyValuePair< string, int >("status",3 ) ); 
 
         //realiza busca
         loadingScreen.OpenLoadScreen();
         IEnumerable<DocumentSnapshot> result = Enumerable.Empty<DocumentSnapshot>();
-        result = await databaseHandler.AsyncQueryDeviceByDictionary(parameters);
+        result = await databaseHandler.AsyncQueryDeviceByMultiParamets(parameters);
         loadingScreen.CloseLoadScreen();
         if(result.Count()<1)
         {
