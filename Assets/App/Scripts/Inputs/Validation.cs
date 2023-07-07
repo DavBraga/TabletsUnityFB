@@ -8,7 +8,7 @@ namespace DavsInputValidation
         public static void ValidateField(TMP_Text input, int fieldSize, Color invalidColor, Color validColor)
         {
             Debug.Log("field size :"+ input.text.Length);
-            if(input.text.Length<fieldSize)
+            if(input.text.Length!=fieldSize)
             {
                 input.color = invalidColor;
             }

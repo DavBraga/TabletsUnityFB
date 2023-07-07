@@ -40,8 +40,23 @@ public class QueryHandler : MonoBehaviour
     bool isPatrimonioValid;
     public bool isWaitingQuery = false;
 
+    // scanner
+    bool readFromScanner= false;
+    TMP_InputField targetInpuField;
+    [Header("Sistemas")]
     [SerializeField] BdOps databaseHandler;
+    [SerializeField] CachedData cachedData;
 
+    private void OnEnable() {
+        if(!readFromScanner) return;
+
+        targetInpuField.text = cachedData.GetCachedBarCodeData();
+        Validation.ValidateField(IMEI.textComponent,16,Color.red,Color.black);
+        Validation.ValidateField(patrimonio.textComponent,7,Color.red,Color.black);
+        targetInpuField.Select();
+        targetInpuField = null;
+        readFromScanner = false;
+    }
     private void Start() {
 
         IMEI.onDeselect.AddListener(
@@ -152,5 +167,19 @@ public class QueryHandler : MonoBehaviour
     {
         IMEI.text = null;
         patrimonio.text = null;
+    }
+
+    public void ButtonScanPatrimonio()
+    {
+        readFromScanner = true;
+        targetInpuField = patrimonio;
+        
+    }
+    public void ButtonScanIMEI()
+    {
+        readFromScanner = true;
+        targetInpuField = IMEI;
+
+        
     }
 }

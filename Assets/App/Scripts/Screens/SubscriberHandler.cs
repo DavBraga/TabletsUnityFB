@@ -12,11 +12,17 @@ public class SubscriberHandler : MonoBehaviour
     [SerializeField] TMP_InputField IMEI;
     [SerializeField] SerializableTMPDropdown status;
     [SerializeField] SerializableTMPDropdown paradeiro;
+    [SerializeField] ScreenNavigator navigator;
+    [SerializeField] CachedData cachedData;
     //tmp
 
     [SerializeField] BdOps databaseHandler;
     [SerializeField] Alert alert;
     [SerializeField] LoadingScreen loadingScreen;
+    [SerializeField] string scannerRoute = "scanner";
+
+    private bool readFromScanner = false;
+    TMP_InputField targetInpuField;
 
 
     private  void Start() 
@@ -43,14 +49,25 @@ public class SubscriberHandler : MonoBehaviour
 
     }
 
+    private void OnEnable() {
+        if(!readFromScanner) return;
+
+        targetInpuField.text = cachedData.GetCachedBarCodeData();
+        targetInpuField.Select();
+        Validation.ValidateField(IMEI.textComponent,16,Color.red,Color.black);
+        Validation.ValidateField(patrimonio.textComponent,7,Color.red,Color.black);
+        targetInpuField = null;
+        readFromScanner = false;
+    }
+
     public async void SaveData()
     {
-        if (string.IsNullOrEmpty(IMEI.text)||IMEI.text.Length<15 )
+        if (string.IsNullOrEmpty(IMEI.text)||IMEI.text.Length!=15 )
         {
             alert.Open("IMEI inválido!");
             return;
         }
-        if (string.IsNullOrEmpty(patrimonio.text)||patrimonio.text.Length<6)
+        if (string.IsNullOrEmpty(patrimonio.text)||patrimonio.text.Length!=6)
         {
             alert.Open("Patrimônio inválido!");
             return;
@@ -70,6 +87,20 @@ public class SubscriberHandler : MonoBehaviour
         ResetFields();
     }
 
+    public void ButtonScanPatrimonio()
+    {
+        readFromScanner = true;
+        targetInpuField = patrimonio;
+        navigator.Navigate(scannerRoute);
+        
+    }
+    public void ButtonScanIMEI()
+    {
+        readFromScanner = true;
+        targetInpuField = IMEI;
+        navigator.Navigate(scannerRoute);
+        
+    }
     public void ResetFields()
     {
         IMEI.text = null;
