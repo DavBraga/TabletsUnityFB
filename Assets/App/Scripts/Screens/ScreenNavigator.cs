@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ScreenNavigator : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class ScreenNavigator : MonoBehaviour
     private Dictionary<string, TelaDoApp> rotas= new Dictionary<string, TelaDoApp>();
     private List<string> ultimaTelaVisitada = new List<string>();
     private string telaAtual="";
+    public UnityAction onScreenTransit;
 
     private void Awake()
     {
@@ -54,6 +56,7 @@ public class ScreenNavigator : MonoBehaviour
         screen.gameObject.SetActive(true);
         screen.TransitIn();
         this.telaAtual = screen.GetScreenName();
+        onScreenTransit?.Invoke();
 
     }
 
@@ -74,7 +77,7 @@ public class ScreenNavigator : MonoBehaviour
         screen.gameObject.SetActive(true);
         screen.TransitIn();
         this.telaAtual = screen.GetScreenName();
-
+        onScreenTransit?.Invoke();
     }
 
     public void NavigateBack()
@@ -86,5 +89,10 @@ public class ScreenNavigator : MonoBehaviour
         }
         /* //todo
         if (ultimaTelaVisitada == "") return;*/
+    }
+
+    public string GetCurrentScreen()
+    {
+        return telaAtual;
     }
 }
