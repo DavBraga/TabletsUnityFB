@@ -9,6 +9,7 @@ public class ScreenNavigator : MonoBehaviour
 {
     [SerializeField] private List<TelaDoApp> telasDoApp = new List<TelaDoApp>();
     [SerializeField] string telaInicial = "home";
+    [SerializeField] int screenMode=  0;
 
     private Dictionary<string, TelaDoApp> rotas= new Dictionary<string, TelaDoApp>();
     private List<string> ultimaTelaVisitada = new List<string>();
@@ -40,9 +41,10 @@ public class ScreenNavigator : MonoBehaviour
             index++;
         }
     }
-    public void Navigate(string telaASerVisitada = "home")
+    public void Navigate(string telaASerVisitada = "home", int screenMode = 0 )
     {
         TelaDoApp screen;
+        this.screenMode = screenMode;
         // sair da tela anteriro
         if(telaAtual!="")
         {
@@ -60,9 +62,15 @@ public class ScreenNavigator : MonoBehaviour
 
     }
 
-    public void Navigate(bool returning, string telaASerVisitada = "home" )
+    public void Navigate(string telaASerVisitada = "home")
+    {
+        Navigate(telaASerVisitada, 0);
+    }
+
+    public void Navigate(bool returning, string telaASerVisitada = "home", int screenMode = 0 )
     {
         TelaDoApp screen;
+        this.screenMode = screenMode;
         // sair da tela anteriro
         if (telaAtual != "")
         {
@@ -80,8 +88,9 @@ public class ScreenNavigator : MonoBehaviour
         onScreenTransit?.Invoke();
     }
 
-    public void NavigateBack()
+    public void NavigateBack(int screenMode = 0)
     {  
+        this.screenMode = screenMode;
         if(ultimaTelaVisitada.Count>0)
         {
             Navigate( true, ultimaTelaVisitada.Last());
@@ -89,6 +98,11 @@ public class ScreenNavigator : MonoBehaviour
         }
         /* //todo
         if (ultimaTelaVisitada == "") return;*/
+    }
+
+    public int GetScreenMode()
+    {
+        return screenMode;
     }
 
     public string GetCurrentScreen()

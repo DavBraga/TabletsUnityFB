@@ -17,6 +17,7 @@ public class QueryHandler : MonoBehaviour
     [SerializeField] ScreenNavigator screenNavigator;
     [SerializeField] string resultRoute = "resultado";
     [SerializeField] string resultListRoute = "resultadolista";
+    [SerializeField] string scanRoute = "scanner";
 
     [Header("Busca por Chave Única")]
     [SerializeField] TMP_InputField patrimonio;
@@ -160,7 +161,7 @@ public class QueryHandler : MonoBehaviour
     }
     public void OpenResultScreen()
     {
-         screenNavigator.Navigate(resultRoute);
+         screenNavigator.Navigate(resultRoute,1);
     }
 
      public void ResetFields()
@@ -173,13 +174,13 @@ public class QueryHandler : MonoBehaviour
     {
         readFromScanner = true;
         targetInpuField = patrimonio;
+        screenNavigator.Navigate(scanRoute);
         
     }
     public void ButtonScanIMEI()
     {
         readFromScanner = true;
         targetInpuField = IMEI;
-
-        
+        screenNavigator.Navigate(scanRoute);
     }
 }

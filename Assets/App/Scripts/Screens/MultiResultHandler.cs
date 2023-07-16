@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using Firebase;
 using Firebase.Firestore;
 using UnityEngine;
@@ -18,16 +19,23 @@ public class MultiResultHandler : MonoBehaviour
     [Header("ELementos de UI")]
     [SerializeField] TextMeshProUGUI numeroEncontrado;
     [SerializeField] GameObject containerDeTablets;
+    [SerializeField] GameObject scrollarea;
 
     // prefab modelo de elmento a ser gerado;
     [SerializeField] GameObject prefabUITabletUnit;
     [SerializeField] int volumeinicial=10;
+
+    ContentSizeFitter sizeFitter;
+    [Header("Size Fitter Delay")]
+    [SerializeField] float sizeFitterDelay = 0.5f;
+    Coroutine delayedFitter;
 
     List<GameObject> objectPool = new();
 
     private void Awake()
     {
         PoolObjects(volumeinicial);
+        sizeFitter= scrollarea.gameObject.GetComponent<ContentSizeFitter>();
 
     }
 
@@ -40,10 +48,13 @@ public class MultiResultHandler : MonoBehaviour
     }
 
     private void OnEnable() {
-        InitializeList();
+
+        InitializeList();  
+       
         
     }
     private void OnDisable() {
+        sizeFitter.enabled = false;
         foreach(GameObject tabletUIElement in objectPool)
         {
             tabletUIElement.SetActive(false);
@@ -53,6 +64,7 @@ public class MultiResultHandler : MonoBehaviour
     // instanciar dinamicamente elementos da lista
     public void InitializeList()
     {
+        containerDeTablets.gameObject.SetActive(false);
         int amountFound = databaseHandler.cachedQueryResult.Count();
         if(amountFound<1) return;
 
@@ -68,8 +80,8 @@ public class MultiResultHandler : MonoBehaviour
         foreach(DocumentSnapshot documentSnapshot in databaseHandler.cachedQueryResult)
         {
             objectPool[index].SetActive(true);
-
             index++;
+            
         }
         index = 0;
         foreach(DocumentSnapshot documentSnapshot in databaseHandler.cachedQueryResult)
@@ -78,9 +90,21 @@ public class MultiResultHandler : MonoBehaviour
             tabletUnitUIScript.Initialize(index+1,
             documentSnapshot, 
             databaseHandler,
-            ()=>{screenNavigator.Navigate(resultRoute);}
+            ()=>{screenNavigator.Navigate(resultRoute,1);}
             );
             index++;
         }
+        containerDeTablets.gameObject.SetActive(true);
+        if(delayedFitter!=null) 
+        StopCoroutine(delayedFitter);
+        delayedFitter = StartCoroutine(delayedActivation());
+    }
+
+    IEnumerator delayedActivation()
+    {
+        yield return new WaitForSeconds(sizeFitterDelay);
+        
+        sizeFitter.enabled = true;
+
     }
 }

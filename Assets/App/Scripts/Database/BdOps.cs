@@ -30,7 +30,7 @@ public class BdOps : MonoBehaviour
             { "IMEI", data.IMEI },
             { "patrimonio", data.patrimonio },
             { "paradeiro", data.paradeiro},
-            {"status",data.status }
+            {"status",data.status },
         };
         var result  = await db.Collection("Tablets").AddAsync(tablet);
         alert.Open("Tablet cadastrado!");
@@ -66,7 +66,7 @@ public class BdOps : MonoBehaviour
             { "IMEI", data.IMEI },
             { "patrimonio", data.patrimonio },
             { "paradeiro", data.paradeiro},
-            {"status",data.status }
+            {"status",data.status },
         };
         await db.Collection("Tablets").Document(docId).SetAsync(tablet).
             ContinueWith((task) =>

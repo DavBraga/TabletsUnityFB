@@ -21,6 +21,7 @@ public class TabletUnitUIElement : MonoBehaviour
 
     public void Initialize(int indexNumber, DocumentSnapshot documentSnapshot, BdOps database, UnityAction followedAction)
     {
+        button.onClick.RemoveAllListeners();
         data = documentSnapshot.ToDictionary();
         index.text = indexNumber.ToString();
         if(data.TryGetValue("patrimonio", out object obj))
@@ -48,9 +49,5 @@ public class TabletUnitUIElement : MonoBehaviour
         );
         button.onClick.AddListener(followedAction);
 
-    }
-
-    private void OnDisable() {
-        button.onClick.RemoveAllListeners();
     }
 }

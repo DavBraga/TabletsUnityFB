@@ -13,7 +13,7 @@ public class NavBar : MonoBehaviour
     void Awake()
     {
         if(navigator)
-        returnButton.onClick.AddListener(navigator.NavigateBack);
+        returnButton.onClick.AddListener(()=>{navigator.NavigateBack();});
     }
     private void OnEnable() {
         if(navigator)

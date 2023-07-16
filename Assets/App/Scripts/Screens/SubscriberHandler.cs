@@ -8,14 +8,17 @@ using DavsInputValidation;
 
 public class SubscriberHandler : MonoBehaviour
 {
+    [ Header("Inputs")]
     [SerializeField] TMP_InputField patrimonio;
     [SerializeField] TMP_InputField IMEI;
     [SerializeField] SerializableTMPDropdown status;
     [SerializeField] SerializableTMPDropdown paradeiro;
+
+    [ Header("Systems")]
     [SerializeField] ScreenNavigator navigator;
     [SerializeField] CachedData cachedData;
     //tmp
-
+     [ Header("Support")]
     [SerializeField] BdOps databaseHandler;
     [SerializeField] Alert alert;
     [SerializeField] LoadingScreen loadingScreen;

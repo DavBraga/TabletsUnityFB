@@ -20,7 +20,7 @@ public class LogIN : MonoBehaviour
        }
        else
        {
-        screenNavigator.Navigate();
+        screenNavigator.Navigate("home");
        } 
     }
     public async void ButtonRegister()
