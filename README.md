@@ -1,3 +1,5 @@
+EN VERSION HERE: https://github.com/DavBraga/TabletsUnityFB/blob/main/englishREADME.MD
+
 # Catálogo de Dispositivos
 
 Um aplicativo CRUD para dispositivos móveis usando Unity e Firebase.
