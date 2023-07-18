@@ -152,7 +152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2413960424196687762
 RectTransform:
   m_ObjectHideFlags: 0
@@ -788,13 +788,14 @@ GameObject:
   - component: {fileID: 4707503299169493912}
   - component: {fileID: 922049545270417851}
   - component: {fileID: 926522816637901041}
+  - component: {fileID: 8084756440798233819}
   m_Layer: 5
   m_Name: "Container_Observa\xE7\xE3o 1"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &857411941396859185
 RectTransform:
   m_ObjectHideFlags: 0
@@ -880,6 +881,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8084756440798233819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6596081709880647202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 698ee2ce5b34c7f40a40733e3c58fa4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: {fileID: 820002136969593978}
+  title: {fileID: 423341338852609335}
+  timestamp: {fileID: 6186577288360267617}
+  button: {fileID: 2906869611752942242}
 --- !u!1 &7362027200518665775
 GameObject:
   m_ObjectHideFlags: 0

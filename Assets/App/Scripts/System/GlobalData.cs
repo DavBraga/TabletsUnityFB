@@ -4,7 +4,11 @@ using UnityEngine;
 
 public static class GlobalData 
 {
-    public static string adminID = "uoPQ6dmSQYQeDim9woXNp2ynNtJ2";
+    public static string neutralColor = "#3EA1B9";
+    public static string goodColor = "#3EB941";
+
+    public static string alertColor = "#C1BF41";
+    public static string problemColor ="#C12F3B";
     public static string ConvertStatus(int value)
     {
         if(value==0)

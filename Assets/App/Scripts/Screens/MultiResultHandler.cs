@@ -90,7 +90,7 @@ public class MultiResultHandler : MonoBehaviour
             tabletUnitUIScript.Initialize(index+1,
             documentSnapshot, 
             databaseHandler,
-            ()=>{screenNavigator.Navigate(resultRoute,1);}
+            ()=>{screenNavigator.Navigate(resultRoute);}
             );
             index++;
         }

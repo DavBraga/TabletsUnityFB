@@ -6,6 +6,8 @@ public class TelaDoApp : MonoBehaviour
 {
     CanvasGroup group;
     [SerializeField] string nomeDaTela ="";
+
+    [SerializeField] bool navbar = true;
     private void Awake()
     {
         group = GetComponent<CanvasGroup>();
@@ -25,5 +27,9 @@ public class TelaDoApp : MonoBehaviour
         if (nomeDaTela.Length < 1) return "" ;
 
         return nomeDaTela;
+    }
+    public bool GetNavBar()
+    {
+        return navbar;
     }
 }

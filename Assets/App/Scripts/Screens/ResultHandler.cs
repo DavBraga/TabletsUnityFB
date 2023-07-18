@@ -6,6 +6,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using Firebase.Firestore;
+using System.Linq;
 
 public class ResultHandler : MonoBehaviour
 {
@@ -15,12 +17,16 @@ public class ResultHandler : MonoBehaviour
     [SerializeField] ScreenNavigator screenNavigator;
     [SerializeField] SerializableTMPDropdown status;
     [SerializeField] SerializableTMPDropdown paradeiro;
+
+    [Header("Edit Buttons")]
     [SerializeField] Button salvar;
     [SerializeField] Button edit;
     [SerializeField] Button delete;
     [SerializeField] Button cadastrar;
     [SerializeField] Confirmar confirmar;
+    [SerializeField] Button observation;
 
+    [Header("UI")]
     //elementos de UI
     [SerializeField] Alert alert;
     [SerializeField] LoadingScreen loadingScreen;
@@ -29,10 +35,12 @@ public class ResultHandler : MonoBehaviour
 
     // dados recuperados
     Dictionary<string, object> data = new();
+    [SerializeField] string observationsRoute="Observações";
+
     private void OnEnable()
     {
         //toredo
-        if (screenNavigator.GetScreenMode() == 0)
+        if (screenNavigator.GetScreenMode() == 1)
         {
             OpenRegisterMode();
         }
@@ -42,15 +50,10 @@ public class ResultHandler : MonoBehaviour
     private void OpenRegisterMode()
     {
         EnableEdit();
-
-        patrimonio.text = "";
-        IMEI.text = "";
-        status.Dropdown.value = 0;
-        paradeiro.Dropdown.value = 0;
-
         salvar.gameObject.SetActive(false);
         edit.gameObject.SetActive(false);
         delete.gameObject.SetActive(false);
+        observation.gameObject.SetActive(false);
 
         cadastrar.gameObject.SetActive(true);
     }
@@ -62,11 +65,12 @@ public class ResultHandler : MonoBehaviour
         salvar.gameObject.SetActive(true);
         edit.gameObject.SetActive(true);
         delete.gameObject.SetActive(true);
+        observation.gameObject.SetActive(true);
 
         cadastrar.gameObject.SetActive(false);
 
-        if (databaseHandler.workingTabletSnapShot == null) return;
-        data = databaseHandler.workingTabletSnapShot.ToDictionary();
+        if (databaseHandler.workingDeviceSnapShot == null) return;
+        data = databaseHandler.workingDeviceSnapShot.ToDictionary();
         if (data.TryGetValue("patrimonio", out object obj))
             patrimonio.text = obj.ToString();
         else patrimonio.text = "error";
@@ -92,7 +96,7 @@ public class ResultHandler : MonoBehaviour
         paradeiro.Dropdown.interactable = true;
         salvar.interactable = true;
         
-        if(screenNavigator.GetScreenMode()==0) 
+        if(screenNavigator.GetScreenMode()==1) 
             IMEI.interactable = true;
         
     }
@@ -108,7 +112,7 @@ public class ResultHandler : MonoBehaviour
 
     public async void SobreEscrever()
     {
-         TabletbaseData tabletNewData = new()
+         DeviceBaseData tabletNewData = new()
         {
             IMEI = IMEI.text,
             patrimonio = patrimonio.text,
@@ -116,7 +120,7 @@ public class ResultHandler : MonoBehaviour
             paradeiro = paradeiro.Dropdown.value
         };
         loadingScreen.OpenLoadScreen();
-        await databaseHandler.OverwriteDevice(databaseHandler.workingTabletSnapShot.Id, tabletNewData);
+        await databaseHandler.OverwriteDevice(databaseHandler.workingDeviceSnapShot.Id, tabletNewData);
         loadingScreen.CloseLoadScreen();
         DisableEdit();
     }
@@ -124,7 +128,7 @@ public class ResultHandler : MonoBehaviour
     public async void DeleteTablet()
     {
         loadingScreen.OpenLoadScreen();
-        await databaseHandler.DeleteDevice(databaseHandler.workingTabletSnapShot.Id);
+        await databaseHandler.DeleteDevice(databaseHandler.workingDeviceSnapShot.Id);
         loadingScreen.CloseLoadScreen();
         alert.Open("Dispostivo excluido!");
         DisableEdit();
@@ -139,6 +143,16 @@ public class ResultHandler : MonoBehaviour
         confirmar.gameObject.SetActive(true);
         confirmar.CallConfirmar(DeleteTablet);
         confirmar.onConfirm +=()=> screenNavigator.NavigateBack();
+    }
+
+    public  async void QueryObservations()
+    {
+        IEnumerable<DocumentSnapshot> result = Enumerable.Empty<DocumentSnapshot>();
+        loadingScreen.OpenLoadScreen();
+        result = await databaseHandler.AsyncQueryDeviceObservations(databaseHandler.workingDocumentReference);
+        loadingScreen.CloseLoadScreen();
+        screenNavigator.Navigate(observationsRoute);
+
     }
 
 }

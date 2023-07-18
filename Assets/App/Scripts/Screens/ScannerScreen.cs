@@ -11,6 +11,6 @@ public class ScannerScreen : MonoBehaviour
     public void ButtonCapture()
     {
         cachedData.CacheBarCodeData(scanner.resultData);
-        navigator.NavigateBack();
+        navigator.NavigateBack(1);
     }
 }

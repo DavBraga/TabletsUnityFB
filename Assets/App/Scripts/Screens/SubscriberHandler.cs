@@ -53,8 +53,11 @@ public class SubscriberHandler : MonoBehaviour
     }
 
     private void OnEnable() {
-        if(!readFromScanner) return;
-
+        if(!readFromScanner){ 
+            patrimonio.text = "";
+            IMEI.text ="";
+            return;
+            }
         targetInpuField.text = cachedData.GetCachedBarCodeData();
         targetInpuField.Select();
         Validation.ValidateField(IMEI.textComponent,16,Color.red,Color.black);
@@ -76,7 +79,7 @@ public class SubscriberHandler : MonoBehaviour
             return;
         } 
 
-        TabletbaseData tabletbaseData = new()
+        DeviceBaseData tabletbaseData = new()
         {
             IMEI = IMEI.text,
             patrimonio = patrimonio.text,
@@ -88,20 +91,21 @@ public class SubscriberHandler : MonoBehaviour
         await databaseHandler.TryRegisterDevice(tabletbaseData);
         loadingScreen.CloseLoadScreen();
         ResetFields();
+        navigator.Navigate(navigator.GetCurrentScreen(),0);
     }
 
     public void ButtonScanPatrimonio()
     {
         readFromScanner = true;
         targetInpuField = patrimonio;
-        navigator.Navigate(scannerRoute);
+        navigator.Navigate(scannerRoute,1);
         
     }
     public void ButtonScanIMEI()
     {
         readFromScanner = true;
         targetInpuField = IMEI;
-        navigator.Navigate(scannerRoute);
+        navigator.Navigate(scannerRoute,1);
         
     }
     public void ResetFields()

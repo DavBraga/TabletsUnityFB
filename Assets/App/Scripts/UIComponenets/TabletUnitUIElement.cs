@@ -44,7 +44,7 @@ public class TabletUnitUIElement : MonoBehaviour
 
         button.onClick.AddListener(()=>
         {
-            database.UpdateWorkingTabletSnapshot(documentSnapshot);
+            database.UpdateWorkingDeviceSnapshot(documentSnapshot);
         }
         );
         button.onClick.AddListener(followedAction);

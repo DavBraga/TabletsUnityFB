@@ -88,16 +88,22 @@ public class ScreenNavigator : MonoBehaviour
         onScreenTransit?.Invoke();
     }
 
-    public void NavigateBack(int screenMode = 0)
+    public void NavigateBack()
     {  
-        this.screenMode = screenMode;
         if(ultimaTelaVisitada.Count>0)
         {
             Navigate( true, ultimaTelaVisitada.Last());
             ultimaTelaVisitada.RemoveAt(ultimaTelaVisitada.Count-1);
         }
-        /* //todo
-        if (ultimaTelaVisitada == "") return;*/
+    }
+
+    public void NavigateBack(int injectedScreenMode)
+    {
+        if(ultimaTelaVisitada.Count>0)
+        {
+            Navigate( true, ultimaTelaVisitada.Last(),injectedScreenMode);
+            ultimaTelaVisitada.RemoveAt(ultimaTelaVisitada.Count-1);
+        }
     }
 
     public int GetScreenMode()

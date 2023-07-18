@@ -174,13 +174,13 @@ public class QueryHandler : MonoBehaviour
     {
         readFromScanner = true;
         targetInpuField = patrimonio;
-        screenNavigator.Navigate(scanRoute);
+        screenNavigator.Navigate(scanRoute,1);
         
     }
     public void ButtonScanIMEI()
     {
         readFromScanner = true;
         targetInpuField = IMEI;
-        screenNavigator.Navigate(scanRoute);
+        screenNavigator.Navigate(scanRoute,1);
     }
 }
