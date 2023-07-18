@@ -32,7 +32,7 @@ Este projeto é um aplicativo para dispositivos móveis desenvolvido com Unity e
 
 1. Faça o download do repositório do projeto.
 
-2. Abra o projeto no Unity.
+2. Abra o projeto no Unity.( Versão Unity: 2022.3.3f1 )
 
 3. Configuração do Firebase:
    - Crie um projeto no Firebase Console (https://console.firebase.google.com/) e obtenha as credenciais do projeto.
