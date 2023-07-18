@@ -30,7 +30,7 @@ This project is a mobile application developed with Unity and Firebase. Designed
 
 1. Download the project repository.
 
-2. Open the project in Unity.
+2. Open the project in Unity. ( Unity Ver.: 2022.3.3f1 )
 
 3. Firebase Configuration:
    - Create a project in the Firebase Console (https://console.firebase.google.com/) and obtain the project credentials.
