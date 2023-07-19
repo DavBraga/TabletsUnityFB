@@ -16,7 +16,7 @@ Este projeto é um aplicativo para dispositivos móveis desenvolvido com Unity e
 
 - Leitura de QR code e código de barras: O aplicativo possui a capacidade de fazer a leitura de QR codes e códigos de barras para capturar automaticamente os números de patrimônio e IMEI dos dispositivos.
 
-- Pesquisa e filtros: Os usuários podem realizar pesquisas e aplicar filtros para encontrar dispositivos específicos com base em critérios como marca, modelo, número de série, entre outros.
+- Pesquisa e filtros: Os usuários podem realizar pesquisas e aplicar filtros para encontrar dispositivos específicos com base em critérios como patrimônio, IMEI, status e paradeiro.
 
 - Edição e exclusão de dados: Os usuários podem editar as informações já inseridas no banco de dados, permitindo a atualização de detalhes dos dispositivos registrados.
 
