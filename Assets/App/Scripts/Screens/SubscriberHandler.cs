@@ -53,7 +53,7 @@ public class SubscriberHandler : MonoBehaviour
     }
 
     private void OnEnable() {
-        if(!readFromScanner){ 
+        if(!readFromScanner&& navigator.GetScreenMode()==1){ 
             patrimonio.text = "";
             IMEI.text ="";
             return;

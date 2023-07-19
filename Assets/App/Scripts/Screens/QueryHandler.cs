@@ -161,7 +161,7 @@ public class QueryHandler : MonoBehaviour
     }
     public void OpenResultScreen()
     {
-         screenNavigator.Navigate(resultRoute,1);
+         screenNavigator.Navigate(resultRoute);
     }
 
      public void ResetFields()

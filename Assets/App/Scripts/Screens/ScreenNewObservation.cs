@@ -18,6 +18,8 @@ public class ScreenNewObservation : MonoBehaviour
     [SerializeField] LoadingScreen loadingScreen;
     private Dictionary<string, object> data;
 
+    [SerializeField] string deviceScreen = "Dados de Dispositivo";
+
     // Start is called before the first frame update
 
     private void OnEnable() {
@@ -75,6 +77,6 @@ public class ScreenNewObservation : MonoBehaviour
         loadingScreen.OpenLoadScreen();
         await database.RegisterObservation(observationData, database.workingDocumentReference);
         loadingScreen.CloseLoadScreen();
-        navigator.NavigateBack();
+        navigator.Navigate(deviceScreen);
     }
 }

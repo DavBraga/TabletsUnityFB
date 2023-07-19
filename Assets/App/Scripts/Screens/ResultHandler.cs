@@ -70,9 +70,13 @@ public class ResultHandler : MonoBehaviour
         cadastrar.gameObject.SetActive(false);
 
         if (databaseHandler.workingDeviceSnapShot == null) return;
+        Debug.Log("results!");
         data = databaseHandler.workingDeviceSnapShot.ToDictionary();
         if (data.TryGetValue("patrimonio", out object obj))
+        {
             patrimonio.text = obj.ToString();
+        }
+            
         else patrimonio.text = "error";
 
         if (data.TryGetValue("IMEI", out obj))
