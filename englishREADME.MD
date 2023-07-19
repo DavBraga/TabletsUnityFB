@@ -14,7 +14,7 @@ This project is a mobile application developed with Unity and Firebase. Designed
 
 - QR Code and Barcode Scanning: The application is capable of scanning QR codes and barcodes to automatically capture asset numbers and IMEI of devices.
 
-- Search and Filters: Users can perform searches and apply filters to find specific devices based on criteria such as brand, model, serial number, and more.
+- Search and Filters: Users can perform searches and apply filters to find specific devices based on criteria such as IMEI number, status, whereabouts, and more.
 
 - Data Editing and Deletion: Users can edit the information of devices already stored in the database, allowing for the update of device details.
 
