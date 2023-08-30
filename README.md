@@ -6,7 +6,7 @@ Um aplicativo CRUD para dispositivos móveis usando Unity e Firebase.
 
 ## Descrição
 
-Este projeto é um aplicativo para dispositivos móveis desenvolvido com Unity e Firebase.Pensando na necessidade de uma instituição educacional de fazer o controle de dispostivos móveis em seu acervo o aplicativo foi modelado afim de  permitir registrar dispositivos em uma base de dados e adicionar observações sobre cada dispositivo. Além disso, o aplicativo tem a funcionalidade de leitura de QR code e código de barras para capturar números de patrimônio e IMEI dos dispositivos. O aplicativo também oferece recursos de pesquisa, filtros e edição de dados já inseridos no banco de dados. A autenticação básica com o Firebase é implementada para garantir que usuários possam acessar e modificar as informações dos dispositivos.
+Este projeto é um aplicativo para dispositivos móveis desenvolvido com Unity e Firebase.Pensando na necessidade de uma instituição educacional de fazer o controle de dispostivos móveis em seu acervo, o aplicativo foi modelado afim de  permitir registrar dispositivos em uma base de dados e adicionar observações sobre cada dispositivo. Além disso, o aplicativo tem a funcionalidade de leitura de QR code e código de barras para capturar números de patrimônio e IMEI dos dispositivos. O aplicativo também oferece recursos de pesquisa, filtros e edição de dados já inseridos no banco de dados. A autenticação básica com o Firebase é implementada para garantir que usuários possam acessar e modificar as informações dos dispositivos.
 
 ## Funcionalidades
 
